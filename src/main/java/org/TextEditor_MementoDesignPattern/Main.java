@@ -1,24 +1,32 @@
 package org.TextEditor_MementoDesignPattern;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
 
-        // create a new TextEditor instance
+        // Create a new TextEditor instance
         TextEditor textEditor = new TextEditor();
+        History history = new History();
 
+        // Set content and save states
         textEditor.setContent("Hello, ");
-        textEditor.save();
+        history.saveHistoryState(textEditor.save());
 
         textEditor.setContent("World!");
-        textEditor.save();
+        history.saveHistoryState(textEditor.save());
 
-        textEditor.setContent("Welcome to memento design patter"); // content = Welcome to memento design patter
-        textEditor.undo();  // content = World!
-        textEditor.undo();  // content = Hello,
-        textEditor.redo();  // content = World!
+        textEditor.setContent("Welcome to memento design pattern");
+        history.saveHistoryState(textEditor.save());
 
-        System.out.println(textEditor.getContent());
+        textEditor.setContent("This is will n't print out");
+        history.saveHistoryState(textEditor.save());
+
+        // Undo operations
+        textEditor.restore(history.undo()); // content = "Welcome to memento design pattern"
+        textEditor.restore(history.undo()); // content = "World!"
+
+        // Redo operation
+        textEditor.restore(history.redo()); // content = "Welcome to memento design pattern"
+
+        System.out.println(textEditor.getContent()); // Expected output: Welcome to memento design pattern
     }
 }
