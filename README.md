@@ -44,7 +44,7 @@ The project contains the following classes:
 ### Setup
 
 1. Clone the repository and import it into your Java IDE.
-2. Compile and run the `Main` class to see the Template Method Design Pattern in action.
+2. Compile and run the `Main` class to see the Memento Design Pattern in action.
 
 ### Example Code
 
